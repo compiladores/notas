@@ -2,10 +2,11 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
+import { getRuns } from '../api/useRuns'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({runs}:{runs:any[]}) {
   return (
     <>
       <Head>
@@ -15,6 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        {runs && JSON.stringify(runs)}
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
@@ -120,4 +122,12 @@ export default function Home() {
       </main>
     </>
   )
+}
+
+
+export async function getStaticProps () {
+  const runs = await getRuns('lab5-v2-jisbruzzi');
+  return {
+    props:{runs}
+  }
 }
