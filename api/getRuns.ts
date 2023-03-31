@@ -10,18 +10,22 @@ interface RunResult {
 export async function getRunsOfRepo(repo: string): Promise<RunResult[]> {
   console.log("arranca");
   for await (const { octokit } of app.eachInstallation.iterator()) {
-    const runs = await octokit.rest.actions.listWorkflowRunsForRepo({
-      owner: "compiladores",
-      repo,
-      status: "completed",
-    });
-    console.log({ runs });
-    return runs.data.workflow_runs.map((run) => ({
-      conclusion: run.conclusion,
-      runNumber: run.run_number,
-      url: run.html_url,
-      updatedAt: run.updated_at,
-    }));
+    try {
+      const runs = await octokit.rest.actions.listWorkflowRunsForRepo({
+        owner: "compiladores",
+        repo,
+        status: "completed",
+      });
+      return runs.data.workflow_runs.map((run) => ({
+        conclusion: run.conclusion,
+        runNumber: run.run_number,
+        url: run.html_url,
+        updatedAt: run.created_at,
+      }));
+    } catch (e) {
+      console.log("Not found " + repo);
+      return [];
+    }
   }
   return [];
 }

@@ -1,7 +1,7 @@
 import { getLastRunOfRepo } from "./getRuns";
 import { alumni, getRepoName, otherRules, projectsDueDates } from "./semester";
 
-interface ProjectStatus {
+export interface ProjectStatus {
   project: string;
   alumn: string;
   repoName: string;

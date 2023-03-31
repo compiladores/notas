@@ -1,4 +1,4 @@
-interface ScoreRule {
+export interface ScoreRule {
   score: number;
   dueDate: string;
   type: "other" | "project";
