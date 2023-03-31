@@ -15,6 +15,7 @@ export const alumni = [
   "kevin-untrojb",
   "paulocesarcuneo",
   "TaielC",
+  "francupp9-12",
 ];
 export const projectsDueDates: Record<string, string> = {
   tpo1: "2023-04-11T23:59:00.000-03:00",
