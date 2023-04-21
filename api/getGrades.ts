@@ -45,7 +45,9 @@ export async function getGradesForSemester(): Promise<Grade[]> {
         };
       } else {
         if (ruleId === "tpoAll") {
-          const allTpo = rules.filter((r) => r.id.includes("tpo"));
+          const allTpo = rules.filter(
+            (r) => r.id.includes("tpo") && r.id !== "tpoAll"
+          );
           const tpoStatuses = allTpo.map((rule) => getStatus(rule.id));
           const failed = tpoStatuses.filter(
             (s) =>
